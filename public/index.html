@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Другие кодировки плохо поддерживаются или имеют дыры -->
+  <meta charset="UTF-8">
+  <!-- Режим работы Internet Explorer -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Для мобилок -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FONTs -->
+
+
+  <!-- META-ТЕГИ ДЛЯ ПОИСКОВИКОВ -->
+  <meta name="description" content="Users List" />
+  <meta name="keywords" content="users, list, nodejs" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex" />
+
+  <!-- FAVICON -->
+
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/index.css" type="text/css">
+
+  <!-- Заголовок -->
+  <title>Users List</title>
+</head>
+
+<body>
+  <div id="spinner-wrapper" class="spinner-wrapper d-none position-absolute top-0 start-0 min-vw-100 min-vh-100 d-flex justify-content-center align-items-center">
+    <div id="spinner" class="spinner spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+  <div class="container">
+    <table class="table table-striped caption-top">
+      <caption>Список пользователей</caption>
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">№</th>
+          <th scope="col">Имя</th>
+          <th scope="col">Возраст</th>
+          <th scope="col">Управление</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modalAddUser">Добавить
+      пользователя...</button>
+  </div>
+
+  <!-- Модальное окно ADD USER -->
+  <div class="modal fade" id="modalAddUser" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Добавить нового пользователя</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formUserAdd" name="formUserAdd" action="/" method="" class="was-validated">
+            <div class="mb-3">
+              <label for="inputName" class="form-label">Имя:</label>
+              <input type="text" name="userName" minlength="2" maxlength="15" class="form-control" id="inputName" pattern="^[a-zA-Z]+$" autocomplete="off" required>
+              <div class="invalid-feedback">
+                Буквы латинского алфавита [a-zA-Z], без пробелов
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="inputAge" class="form-label">Возраст:</label>
+              <input type="number" name="userAge" min="0" max="150" class="form-control" id="inputAge" autocomplete="off" required>
+              <div class="invalid-feedback">
+                От 0 до 150
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+          <button type="submit" form="formUserAdd" class="btn btn-success" data-bs-dismiss="modal">Добавить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно EDIT USER -->
+  <div class="modal fade" id="modalEditUser" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Изменить данные пользователя</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditUser" name="formEditUser" action="/" method="" class="was-validated">
+            <div class="mb-3">
+              <label for="inputId" class="form-label">_id:</label>
+              <input type="text" name="userId" minlength="20" maxlength="30" class="form-control" id="inputId" autocomplete="off" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="inputName" class="form-label">Имя:</label>
+              <input type="text" name="userName" minlength="2" maxlength="15" class="form-control" id="inputName" pattern="^[a-zA-Z]+$" autocomplete="off" required>
+              <div class="invalid-feedback">
+                Буквы латинского алфавита [a-zA-Z], без пробелов
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="inputAge" class="form-label">Возраст:</label>
+              <input type="number" name="userAge" min="0" max="150" class="form-control" id="inputAge" autocomplete="off" required>
+              <div class="invalid-feedback">
+                От 0 до 150
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+          <button type="submit" form="formEditUser" class="btn btn-primary" data-bs-dismiss="modal">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно DELETE USER -->
+  <div class="modal fade" id="modalUserDel" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Удалить пользователя?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formUserDel" name="formUserDel" action="/" method="">
+            <div class="mb-3">
+              <label for="inputId" class="form-label">_id:</label>
+              <input type="text" name="userId" minlength="20" maxlength="30" class="form-control" id="inputId" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="inputName" class="form-label">Имя:</label>
+              <input type="text" name="userName" class="form-control" id="inputName" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="inputAge" class="form-label">Возраст:</label>
+              <input type="number" name="userAge" class="form-control" id="inputAge" disabled>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+          <button type="submit" form="formUserDel" class="btn btn-danger" data-bs-dismiss="modal">Удалить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
