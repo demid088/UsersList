@@ -6,6 +6,7 @@
 * NodeJS
 * Express
 * MongoDB
+* JSON Server
 
 ## План:
 
