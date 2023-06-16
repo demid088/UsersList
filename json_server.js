@@ -223,8 +223,6 @@ app.delete("/api/user/:id", async (req, res) => {
 
 // =============================SERVER=================================
 
-// app.listen(port, hostname, () => {
-//   console.log(`Server running at http://${hostname}:${port}/`);
-// });
-
-app.listen(80)
+app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
