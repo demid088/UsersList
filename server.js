@@ -7,7 +7,7 @@ const app = express()
 // const jsonParser = express.json()
 
 const hostname = 'localhost'
-const port = 3000
+const port = process.env.port || 3000
 
 // ----------------------------------MongoDB-------------------------
 
