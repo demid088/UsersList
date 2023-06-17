@@ -70,10 +70,11 @@ app.get("/api/users", (req, res) => {
       })
       res.status(resJson.statusCode).send(users)
     })
-  })
 
-  reqJson.on('error', (e) => {
-    console.error('ERROR json_server: ' + e)
+    reqJson.on('error', (e) => {
+      // console.error('ERROR json_server: ' + e)
+      res.status(resJson.statusCode).send(users)
+    })
   })
 
   try {
@@ -142,10 +143,10 @@ app.post('/api/user', async (req, res) => {
       userId = JSON.parse(data).id.toString()
       res.status(resJson.statusCode).send(userId)
     })
-  })
 
-  reqJson.on('error', (e) => {
-    console.error('ERROR json_server: ' + e)
+    reqJson.on('error', (e) => {
+      console.error('ERROR json_server: ' + e)
+    })
   })
 
   try {
@@ -179,10 +180,10 @@ app.put('/api/user/:id', async (req, res) => {
     resJson.on('data', (data) => {
       res.status(resJson.statusCode).send()
     })
-  })
 
-  reqJson.on('error', (e) => {
-    console.error('ERROR json_server: ' + e)
+    reqJson.on('error', (e) => {
+      console.error('ERROR json_server: ' + e)
+    })
   })
 
   try {
@@ -208,10 +209,10 @@ app.delete("/api/user/:id", async (req, res) => {
     resJson.on('data', (data) => {
       res.status(resJson.statusCode).send()
     })
-  })
 
-  reqJson.on('error', (e) => {
-    console.error('ERROR json_server: ' + e)
+    reqJson.on('error', (e) => {
+      console.error('ERROR json_server: ' + e)
+    })
   })
 
   try {
