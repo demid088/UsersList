@@ -4,8 +4,8 @@
   "description": "Users list",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
-    "json_server": "nodemon json_server.js"
+    "dev": "nodemon server.js",
+    "dev_json": "nodemon json_server.js"
   },
   "author": "demid088",
   "license": "ISC",
