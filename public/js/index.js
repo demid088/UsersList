@@ -191,7 +191,8 @@ async function GetUsersAsync() {
       // обрабатываем полученные данные
       users = await response.json()
       ShowSpinner(false)
-  } else {
+    } else {
+    ShowSpinner(false)
     alert("Ошибка HTTP: " + response.status);
   }
 
