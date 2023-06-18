@@ -7,7 +7,7 @@ const middlewares = require('json-server').defaults()
 const app = express()
 
 const hostname = 'localhost'
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 // ----------------------------------json-server db-------------------------
 
